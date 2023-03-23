@@ -1,34 +1,18 @@
-import Modal from "@/components/Modal/Modal";
-import getIngredientsAndMeasures from "@/utils/getIngredientsAndMeasures";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
+import Modal from "@/components/Modal/Modal";
+import getIngredientsAndMeasures from "@/utils/getIngredientsAndMeasures";
 import usePreventScroll from "@/hooks/usePreventScroll";
-
-interface indexProps {
-  allCocktailsData: {
-    drinks: [
-      {
-        idDrink: string;
-        strDrinkThumb: string;
-        strInstructions: string;
-      }
-    ];
-  };
-}
-
-interface drink {
-  strDrinkThumb: string;
-  strInstructions: string;
-}
+import { indexProps, drinkInterface } from "@/interfaces/interfaces";
 
 export default function Home({ allCocktailsData }: indexProps) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [openDrink, setOpenDrink] = useState<drink>();
+  const [openDrink, setOpenDrink] = useState<drinkInterface>();
 
   const { ingredients, measures } = getIngredientsAndMeasures(openDrink!);
 
-  const onModalOpen = (drink: drink) => {
+  const onModalOpen = (drink: drinkInterface) => {
     setModalOpen(!modalOpen);
     setOpenDrink(drink);
   };
@@ -54,9 +38,9 @@ export default function Home({ allCocktailsData }: indexProps) {
               Welcome to the CocktailDB API!
             </h1>
             <p className="welcome-message-paragraph">
-              🍹 Here you can find a list of cocktails pulled from the
-              CocktailDB API along with recipes, click on the images to open the
-              recipe. Enjoy! 🍹
+              Here you can find a list of cocktails pulled from the CocktailDB
+              API along with recipes, click on the images to open the recipe.
+              Enjoy!
             </p>
           </div>
           <div className="drinks-container">
@@ -65,7 +49,7 @@ export default function Home({ allCocktailsData }: indexProps) {
                 <div key={drink.idDrink} className="thumbnail-image-container">
                   <Image
                     src={`${drink.strDrinkThumb}/preview`}
-                    alt="Drink thumbnail"
+                    alt="Image of the cocktail"
                     fill
                     sizes="(max-width: 17.5rem) 100vw,
               (max-width: 48rem) 50vw,
@@ -88,7 +72,7 @@ export default function Home({ allCocktailsData }: indexProps) {
             <Modal openModal={modalOpen} setOpenModal={setModalOpen}>
               <div className="modal-content-container">
                 <Image
-                  src={openDrink!.strDrinkThumb}
+                  src={`${openDrink!.strDrinkThumb}/preview`}
                   alt="Image of the cocktail"
                   width="400"
                   height="400"
@@ -120,7 +104,7 @@ export default function Home({ allCocktailsData }: indexProps) {
 
 export const getServerSideProps = async () => {
   const resAllCocktails = await fetch(
-    "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a"
+    "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=&limit=25"
   );
 
   const allCocktailsData = await resAllCocktails.json();
