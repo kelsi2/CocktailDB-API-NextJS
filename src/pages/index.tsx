@@ -25,13 +25,22 @@ export default function Home({ allCocktailsData }: indexProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="regular-width-container h-screen">
+        <div className="regular-width-container">
+          <div className="text-container">
+            <h1 className="welcome-message-header">
+              Welcome to the CocktailDB API!
+            </h1>
+            <p className="welcome-message-paragraph">
+              🍹 Here you can find a list of cocktails pulled along with
+              recipes, click on the images to open the recipe. Enjoy! 🍹
+            </p>
+          </div>
           <div className="drinks-container">
             {allCocktailsData.drinks.map((drink) => {
               return (
                 <div key={drink.idDrink} className="thumbnail-image-container">
                   <Image
-                    src={drink.strDrinkThumb}
+                    src={`${drink.strDrinkThumb}/preview`}
                     alt="Drink thumbnail"
                     fill
                     sizes="(max-width: 17.5rem) 100vw,
