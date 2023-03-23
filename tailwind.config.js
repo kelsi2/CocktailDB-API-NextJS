@@ -10,7 +10,11 @@ module.exports = {
       md: "48rem",
       lg: "66rem",
     },
-    extend: {},
+    extend: {
+       boxShadow: {
+        drinkCards: '0px 2px 15px 2px rgba(31, 29, 29, 0.1)',
+       }
+    },
   },
   plugins: [],
 };

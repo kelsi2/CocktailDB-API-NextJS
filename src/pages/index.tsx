@@ -1,11 +1,18 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+interface indexProps {
+  allCocktailsData: {
+    drinks: [
+      {
+        idDrink: string;
+        strDrinkThumb: string;
+      }
+    ];
+  };
+}
 
-export default function Home({ allCocktailsData }) {
-  console.log(allCocktailsData.drinks.map((drink) => drink.strDrinkThumb));
+export default function Home({ allCocktailsData }: indexProps) {
   return (
     <>
       <Head>
@@ -19,18 +26,22 @@ export default function Home({ allCocktailsData }) {
       </Head>
       <main>
         <div className="regular-width-container h-screen">
-          {allCocktailsData.drinks.map((drink) => {
-            return (
-              <div key={drink.idDrink}>
-                <Image
-                  src={drink.strDrinkThumb}
-                  alt="Drink thumbnail"
-                  width="100"
-                  height="100"
-                />
-              </div>
-            );
-          })}
+          <div className="drinks-container">
+            {allCocktailsData.drinks.map((drink) => {
+              return (
+                <div key={drink.idDrink} className="thumbnail-image-container">
+                  <Image
+                    src={drink.strDrinkThumb}
+                    alt="Drink thumbnail"
+                    fill
+                    sizes="(max-width: 17.5rem) 100vw,
+              (max-width: 48rem) 50vw,
+              33vw"
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </main>
     </>

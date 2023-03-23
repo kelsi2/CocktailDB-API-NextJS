@@ -7,4 +7,13 @@
   .regular-width-container {
     @apply mx-auto sm:w-[85vw] lg:w-[calc(100vw-15rem)] lg:max-w-[75rem];
   }
+
+  /* drinks */
+  .drinks-container {
+    @apply grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 lg:gap-4 md:gap-8 sm:gap-4;
+  }
+
+  .thumbnail-image-container {
+    @apply relative !h-[12.5rem] sm:w-1/2 sm:m-auto md:w-full shadow-drinkCards hover:shadow-xl active:shadow-xl rounded-[2.5rem] duration-150 md:hover:scale-[1.1] hover:cursor-pointer object-cover;
+  }
 }
