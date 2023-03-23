@@ -26,7 +26,7 @@
   }
 
   .thumbnail-image-container {
-    @apply relative !h-[15.5rem] sm:w-1/2 sm:m-auto md:w-full shadow-drinkCards hover:shadow-xl active:shadow-xl rounded-[2.5rem] duration-150 md:hover:scale-[1.03] hover:cursor-pointer object-cover;
+    @apply relative md:!h-[16.5rem] sm:!h-[20rem] sm:w-3/4 sm:m-auto md:w-full shadow-drinkCards hover:shadow-xl active:shadow-xl rounded-[2.5rem] duration-150 md:hover:scale-[1.03] hover:cursor-pointer object-cover;
   }
 
   /* modal */
@@ -36,7 +36,7 @@
   }
 
   .modal {
-    @apply fixed z-30 h-[55%] top-[10%] bg-white w-[85%] rounded-md overflow-y-scroll;
+    @apply fixed z-30 h-[40%] top-[10%] bg-white regular-width-container rounded-md overflow-y-scroll;
   }
 
   .close-modal-button {
@@ -49,5 +49,17 @@
 
   .modal-text-container {
     @apply flex flex-col ml-8;
+  }
+
+  .modal-h2-ingredients {
+    @apply mb-4 text-xl sm:mt-4 md:mt-0;
+  }
+
+  .modal-h2-instructions {
+    @apply my-4 text-xl;
+  }
+
+  .modal-p {
+    @apply sm:mb-4 md:mb-0;
   }
 }

@@ -14,3 +14,12 @@ export interface drinkInterface {
   strDrinkThumb: string;
   strInstructions: string;
 }
+
+export interface modalContentProps {
+  openDrink: drinkInterface
+}
+
+export interface drinksGridInterface {
+  onModalOpen: (drink: drinkInterface) => void;
+  allCocktailsData: { drinks: cocktailsDataInterface[] };
+}
