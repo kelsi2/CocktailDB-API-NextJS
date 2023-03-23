@@ -1,5 +1,7 @@
+import Modal from "@/components/Modal/Modal";
 import Head from "next/head";
 import Image from "next/image";
+import { useState, useCallback, useEffect } from "react";
 
 interface indexProps {
   allCocktailsData: {
@@ -13,6 +15,8 @@ interface indexProps {
 }
 
 export default function Home({ allCocktailsData }: indexProps) {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   return (
     <>
       <Head>
@@ -31,8 +35,9 @@ export default function Home({ allCocktailsData }: indexProps) {
               Welcome to the CocktailDB API!
             </h1>
             <p className="welcome-message-paragraph">
-              🍹 Here you can find a list of cocktails pulled along with
-              recipes, click on the images to open the recipe. Enjoy! 🍹
+              🍹 Here you can find a list of cocktails pulled from the
+              CocktailDB API along with recipes, click on the images to open the
+              recipe. Enjoy! 🍹
             </p>
           </div>
           <div className="drinks-container">
@@ -46,12 +51,26 @@ export default function Home({ allCocktailsData }: indexProps) {
                     sizes="(max-width: 17.5rem) 100vw,
               (max-width: 48rem) 50vw,
               33vw"
+                    className="rounded-[2.5rem]"
+                    onClick={(e) => {
+                      setModalOpen(!modalOpen);
+                      // prevent closing the modal when the modal itself is clicked
+                      e.stopPropagation();
+                    }}
                   />
                 </div>
               );
             })}
           </div>
         </div>
+        {/* modal is hidden by default */}
+        {modalOpen && (
+          <div className="regular-width-container">
+            <Modal openModal={modalOpen} setOpenModal={setModalOpen}>
+              <div>Open modal</div>
+            </Modal>
+          </div>
+        )}
       </main>
     </>
   );

@@ -28,4 +28,18 @@
   .thumbnail-image-container {
     @apply relative !h-[15.5rem] sm:w-1/2 sm:m-auto md:w-full shadow-drinkCards hover:shadow-xl active:shadow-xl rounded-[2.5rem] duration-150 md:hover:scale-[1.03] hover:cursor-pointer object-cover;
   }
+
+  /* modal */
+  .modal-overlay-background {
+    @apply fixed top-0 left-0 z-20 h-full w-full cursor-pointer;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal {
+    @apply fixed z-30 h-[75%] top-[10%] bg-white w-[85%];
+  }
+
+  .close-modal-button {
+    @apply absolute z-30 top-12 right-8 cursor-pointer border-none bg-none;
+  }
 }
