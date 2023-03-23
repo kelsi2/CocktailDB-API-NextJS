@@ -1,7 +1,9 @@
 import Modal from "@/components/Modal/Modal";
+import getIngredientsAndMeasures from "@/utils/getIngredientsAndMeasures";
 import Head from "next/head";
 import Image from "next/image";
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
+import usePreventScroll from "@/hooks/usePreventScroll";
 
 interface indexProps {
   allCocktailsData: {
@@ -9,13 +11,30 @@ interface indexProps {
       {
         idDrink: string;
         strDrinkThumb: string;
+        strInstructions: string;
       }
     ];
   };
 }
 
+interface drink {
+  strDrinkThumb: string;
+  strInstructions: string;
+}
+
 export default function Home({ allCocktailsData }: indexProps) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [openDrink, setOpenDrink] = useState<drink>();
+
+  const { ingredients, measures } = getIngredientsAndMeasures(openDrink!);
+
+  const onModalOpen = (drink: drink) => {
+    setModalOpen(!modalOpen);
+    setOpenDrink(drink);
+  };
+
+  // prevent background scroll when open modal
+  usePreventScroll(modalOpen);
 
   return (
     <>
@@ -53,7 +72,7 @@ export default function Home({ allCocktailsData }: indexProps) {
               33vw"
                     className="rounded-[2.5rem]"
                     onClick={(e) => {
-                      setModalOpen(!modalOpen);
+                      onModalOpen(drink);
                       // prevent closing the modal when the modal itself is clicked
                       e.stopPropagation();
                     }}
@@ -67,7 +86,30 @@ export default function Home({ allCocktailsData }: indexProps) {
         {modalOpen && (
           <div className="regular-width-container">
             <Modal openModal={modalOpen} setOpenModal={setModalOpen}>
-              <div>Open modal</div>
+              <div className="modal-content-container">
+                <Image
+                  src={openDrink!.strDrinkThumb}
+                  alt="Image of the cocktail"
+                  width="400"
+                  height="400"
+                  className="rounded-[2.5rem]"
+                />
+                <div className="modal-text-container">
+                  <h2 className="mb-4 text-xl sm:mt-4 md:mt-0">Ingredients:</h2>
+                  {ingredients.map((ingredient, i) => {
+                    return (
+                      <div key={i} className="mb-2">
+                        {measures[i]} {ingredient}
+                      </div>
+                    );
+                  })}
+
+                  <h2 className="my-4 text-xl">Instructions:</h2>
+                  <p className="sm:mb-4 md:mb-0">
+                    {openDrink!.strInstructions}
+                  </p>
+                </div>
+              </div>
             </Modal>
           </div>
         )}

@@ -36,10 +36,18 @@
   }
 
   .modal {
-    @apply fixed z-30 h-[75%] top-[10%] bg-white w-[85%];
+    @apply fixed z-30 h-[55%] top-[10%] bg-white w-[85%] rounded-md overflow-y-scroll;
   }
 
   .close-modal-button {
-    @apply absolute z-30 top-12 right-8 cursor-pointer border-none bg-none;
+    @apply absolute z-30 top-10 right-8 cursor-pointer border-none bg-none;
+  }
+
+  .modal-content-container {
+    @apply mt-10 mx-6 flex sm:flex-col md:flex-row sm:items-center sm:text-center md:items-start md:text-left;
+  }
+
+  .modal-text-container {
+    @apply flex flex-col ml-8;
   }
 }
