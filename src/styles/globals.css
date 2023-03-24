@@ -36,7 +36,7 @@
   }
 
   .modal {
-    @apply fixed z-30 pb-8 top-[10%] bg-white regular-width-container rounded-md overflow-y-scroll;
+    @apply fixed z-30 pb-8 md:top-[10%] sm:top-[5%] bg-white regular-width-container rounded-md sm:h-[80vh] md:h-auto overflow-y-auto;
   }
 
   .close-modal-button {
